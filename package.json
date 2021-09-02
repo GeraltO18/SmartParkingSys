@@ -1,0 +1,20 @@
+{
+  "name": "parkinglotbilling",
+  "version": "1.0.0",
+  "description": "parkinglot billing system",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon node index.js"
+  },
+  "author": "Team Rocket",
+  "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^7.4.6",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.2",
+    "nodemon": "^2.0.12",
+    "serialport": "^9.2.0",
+    "socket.io": "^4.2.0",
+    "uuid": "^8.3.2"
+  }
+}
