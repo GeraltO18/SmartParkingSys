@@ -6,6 +6,11 @@ const slotSchema = mongoose.Schema({
     type: String,
     default: v4().toString(),
   },
+  slotname: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   model: {
     type: String,
     default: null,
