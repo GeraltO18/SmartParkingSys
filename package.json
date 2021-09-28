@@ -4,7 +4,8 @@
   "description": "parkinglot billing system",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon node index.js"
+    "start": "nodemon node index.js",
+    "build:css": "tailwindcss -i ./views/src/style.css -o ./views/public/parking.css"
   },
   "author": "Team Rocket",
   "license": "ISC",
@@ -14,8 +15,10 @@
     "JSON": "^1.0.0",
     "mongoose": "^6.0.2",
     "nodemon": "^2.0.12",
+    "sass": "^1.42.1",
     "serialport": "^9.2.0",
     "socket.io": "^4.2.0",
+    "tailwindcss": "^2.2.16",
     "uuid": "^8.3.2"
   }
 }
