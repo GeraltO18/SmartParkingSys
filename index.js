@@ -10,6 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(router);
+app.use(express.static("public"));
 
 (async () => {
   mongoose.connect(
@@ -32,17 +33,18 @@ io.on("connect", () => {
   console.log("client1 connected!!");
 });
 
-const Readline = serialPort.parsers.Readline;
 const port = new serialPort(
-  "\\\\.\\COM10",
-  { baudRate: 9600, parity: "none" },
+  "COM10",
+  { baudRate: 9600, parser: serialport.parsers.readline("\n"), parity: "none" },
   (e) => {
     console.log(e);
   }
 );
-const parser = port.pipe(new Readline({ delimiter: "\r\n" }));
-parser.on("data", async (temp) => {
+
+port.on("open", async (temp) => {
+  console.log(temp);
   const { method, data } = JSON.parse(temp);
+  console.log(method, data);
   if (method == "checkin") {
     let { userid, vehicle } = data;
     let user = await userController.getUser(userid);
