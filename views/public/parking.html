@@ -6,40 +6,53 @@
     <title>Document</title>
     <link rel='stylesheet' href="parking.css">
 </head>
-<body>
-    <canvas id="stars"></canvas>
-    <div class="slider">
-        <input type="range" min="0.5" max="15" value="1" step="0.5" > Speed: <span id="speed"></span>
-    </div>
-
-    <div class="m-3 grid grid-cols-2 gap-1 divide-x-4 divide-green-500 divide-dashed">
-        <div class="bg-black">
-                <h4 class='p-4 text-4xl text-green-500'>User Info</h4>
-                <label class='ml-5 text-green-500'>Name : </label>
-                <label class='italic text-yellow-200'>Vicky</label><br>
-                <label class='ml-5 text-green-500'>Email : </label>
-                <label class='italic text-yellow-200'>abc@abc.com</label><br>
-                <label class='ml-5 text-green-500'>Type of vehicle : </label>
-                <label class='italic text-yellow-200'>SUV</label><br>
-                <label class='ml-5 text-green-500'>CostPerHour : </label>
-                <label class='italic text-yellow-200'>$30</label><br>
+<script src="http://localhost:5500/socket.io/socket.io.js"></script>
+<script>
+    var socket = io.connect('http://localhost:5500');
+    socket.on('connect',()=>{console.log("Connected!!!")});
+    socket.on('display', function(data) {
+        let {user,vehicle} = data;  
+        document.getElementById('model').innerText = vehicle.model;
+        document.getElementById('checkin').innerText = vehicle.checkIn;
+        document.getElementById('slot').innerText = vehicle.slot; 
+        document.getElementById('name').innerText = user.name; 
+        document.getElementById('mail').innerText = user.mail;  
+        document.getElementById('createBtn').addEventListener();
+    });
+</script>
+<body class='font-body'>
+    <div class='bg-contain border-4 border-dashed border-green-500 'style='background-image: url("https://64.media.tumblr.com/tumblr_m8d1vfVaNm1qg6rkio1_500.gifv");'>
+        <div class=" border-4 border-dashed border-green-500 grid grid-cols-2 divide-x-4 divide-green-500 divide-dashed">
+            <div class="bg-black bg-opacity-80 text-3xl text-green-500">
+                <h4 class='p-4 text-4xl'>User Info</h4>
+                <label class='ml-5'>Name : </label>
+                <label id='name' class='italic text-yellow-200'></label><br><br>
+                <label class='ml-5'>Email : </label>
+                <label id='mail' class='italic text-yellow-200'></label><br><br>
+                <label class='ml-5'>Type of vehicle : </label>
+                <label id='model'class='italic text-yellow-200'></label><br><br>
+                <label class='ml-5'>CostPerHour : </label>
+                <label id='cost' class='italic text-yellow-200'>$30</label><br><br>
+                <label class='ml-5'>Subscription Ends in : </label>
+                <label id='day' class='italic text-yellow-200'>50 days</label><br>
+                <button id='createBtn' class='ml-96 mt-4 bg-green-500 p-2 text-2xl font-bold text-black rounded-lg'>Create</button>
+        </div>
+        <div name='Vechile_Info' class="shadow-lg pl-4 bg-black bg-opacity-80 border-dashed border-green-500 ">
+            <h4 class='p-4 text-4xl text-green-500'>Vehicle Info</h4><br>
+            <label class='ml-5 text-3xl text-green-500'>Model : </label>
+            <label id='model' class='italic text-3xl text-yellow-200'></label><br><br>
+            <label class='ml-5 text-3xl text-green-500'>CheckIn time : </label>
+            <label id='checkin' class='italic text-3xl text-yellow-200'></label><br><br>
+            <label class='ml-5 text-3xl text-green-500'>Slot available :></label>
+            <label id='slot' class='italic text-3xl text-yellow-200'></label><br><br>
                 <div class="m-10">
-                    <a href="https://www.animatedimages.org/cat-cars-67.htm"><img src="https://www.animatedimages.org/data/media/67/animated-car-image-0167.gif" border="0" alt="animated-car-image-0167" /></a>
-            </div>
-        </div>
-        <div name='Vechile_Info' class="pl-4 bg-black">
-            <h4 class='p-4 text-4xl text-green-500'>Vehicle Info</h4>
-            <label class='ml-5 text-green-500'>Model : </label><br>
-            <label class='ml-5 text-green-500'>checkIn time : </label><br>
-            <label class='ml-5 text-green-500'>Slot available : </label><br>
-            <div class="m-10">
-                <a href="https://www.animatedimages.org/cat-cars-67.htm"><img src="https://www.animatedimages.org/data/media/67/animated-car-image-0167.gif" border="0" alt="animated-car-image-0167" /></a>
-            </div>
+                    <img src="https://www.animatedimages.org/data/media/67/animated-car-image-0167.gif" border="0" alt="animated-car-image-0167" />
+                </div>
         </div>
     </div>
-    <div name='slot map'class="bg-black rounded-lg ">
-        <p class="text-center text-green-500">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi laboriosam porro velit optio, atque quia quos tempora quam ad vero dicta aspernatur error et omnis unde! At labore ad tempore?</p>
+    <div name='slot map'class="mt-4 bg-black bg-opacity-80 h-full">
+        <p class="text-center text-green-500 text-4xl">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi laboriosam porro velit optio, atque quia quos tempora quam ad vero dicta aspernatur error et omnis unde! At labore ad tempore?</p>
     </div>
-    <div class='m-5 divide-y-4 divide-green-500 divide-dashed'>
+</div>
 </body>
 </html>

@@ -3,12 +3,12 @@ const mongoose = require("mongoose");
 const serialPort = require("serialport");
 const logController = require("./controller/log.controller");
 const JSON = require("JSON");
+const path = require("path");
 const router = require("./routes/log.route");
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
 app.use(router);
 
 (async () => {
@@ -17,13 +17,18 @@ app.use(router);
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+    },
+    () => {
+      console.log("connected to DB!");
     }
   );
 })();
 
-const server = app.listen(4000);
+const server = app.listen(5500);
 
 const io = require("socket.io")(server);
+
+io.on('connect',()=>{console.log("client1 connected!!")});
 
 const Readline = serialPort.parsers.Readline;
 const port = new serialPort("COM3");
