@@ -34,7 +34,7 @@ io.on("connect", () => {
 
 const Readline = serialPort.parsers.Readline;
 const port = new serialPort(
-  "COM10",
+  "\\\\.\\COM10",
   { baudRate: 9600, parity: "none" },
   (e) => {
     console.log(e);
