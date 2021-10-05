@@ -28,10 +28,18 @@ const server = app.listen(5500);
 
 const io = require("socket.io")(server);
 
-io.on('connect',()=>{console.log("client1 connected!!")});
+io.on("connect", () => {
+  console.log("client1 connected!!");
+});
 
 const Readline = serialPort.parsers.Readline;
-const port = new serialPort("COM3");
+const port = new serialPort(
+  "COM10",
+  { baudRate: 9600, parity: "none" },
+  (e) => {
+    console.log(e);
+  }
+);
 const parser = port.pipe(new Readline({ delimiter: "\r\n" }));
 parser.on("data", async (temp) => {
   const { method, data } = JSON.parse(temp);
