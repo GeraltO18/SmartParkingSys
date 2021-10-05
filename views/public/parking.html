@@ -12,11 +12,12 @@
     socket.on('connect',()=>{console.log("Connected!!!")});
     socket.on('display', function(data) {
         let {user,vehicle} = data;  
+        document.getElementById('modeltype').innerText = vehicle.model;
         document.getElementById('model').innerText = vehicle.model;
-        document.getElementById('checkin').innerText = vehicle.checkIn;
-        document.getElementById('slot').innerText = vehicle.slot; 
-        document.getElementById('name').innerText = user.name; 
-        document.getElementById('mail').innerText = user.mail;  
+        document.getElementById('checkin').innerText = vehicle.checkin;
+        document.getElementById('slot').innerText = 1; 
+        document.getElementById('name').innerText = 'summa'; 
+        document.getElementById('mail').innerText = 'abc@abc.com';  
         document.getElementById('createBtn').addEventListener();
     });
 </script>
@@ -30,7 +31,7 @@
                 <label class='ml-5'>Email : </label>
                 <label id='mail' class='italic text-yellow-200'></label><br><br>
                 <label class='ml-5'>Type of vehicle : </label>
-                <label id='model'class='italic text-yellow-200'></label><br><br>
+                <label id='modeltype'class='italic text-yellow-200'></label><br><br>
                 <label class='ml-5'>CostPerHour : </label>
                 <label id='cost' class='italic text-yellow-200'>$30</label><br><br>
                 <label class='ml-5'>Subscription Ends in : </label>
