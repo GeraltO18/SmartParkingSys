@@ -19,9 +19,7 @@ const createCheckIn = async (req, res) => {
 };
 
 const checkoutAndBill = async (slotid, checkOutTime) => {
-  console.log(slotid);
   let slot = await Slot.findById(slotid);
-  console.log(slot);
   let user = await User.findById(slot.userid);
   let pay = findcost(slot.checkin, checkOutTime, slot.model);
   let slotUpdate = {
@@ -40,10 +38,10 @@ const checkoutAndBill = async (slotid, checkOutTime) => {
   user.debt += pay;
   slot.userid = null;
   slot.checkin = null;
-  slot.model = null;
+  slot.modal = null;
   slot.history.push(slotUpdate);
-  await user.save();
-  await slot.save();
+  user.save();
+  slot.save();
   return userUpdate;
 };
 
