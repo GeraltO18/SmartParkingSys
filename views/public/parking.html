@@ -18,8 +18,16 @@
         document.getElementById('slot').innerText = vehicle.slot; 
         document.getElementById('name').innerText = user.name; 
         document.getElementById('mail').innerText = user.email;  
-        document.getElementById('createBtn').onclick = ()=>{alert("req sent!!")};
+        document.getElementById('createBtn').onclick = ()=>{ let url = 'http://localhost:5500/checkin'
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST",url,true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send({
+    userid:user._id,
+    vehicle:vehicle
+});};
     });
+   
 </script>
 <body class='font-body'>
     <div class='bg-contain border-4 border-dashed border-green-500 'style='background-image: url("https://64.media.tumblr.com/tumblr_m8d1vfVaNm1qg6rkio1_500.gifv");'>
