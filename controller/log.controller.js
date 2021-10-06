@@ -1,5 +1,11 @@
+const { model } = require("mongoose");
 const Slot = require("../model/slot.model");
 const User = require("../model/user.model");
+
+let costmap = { SUV: 30, Seden: 20 };
+const findcost = (inTime, outTime, model) => {
+  return 5 * costmap["SUV"];
+};
 
 const createCheckIn = async (req, res) => {
   const { userid, vehicle } = req.body;
