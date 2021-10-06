@@ -12,19 +12,22 @@
     socket.on('connect',()=>{console.log("Connected!!!")});
     socket.on('display', function(data) {
         let {user,vehicle} = data;  
+        const req = {
+            userid: user._id,
+            vehicle: vehicle
+        }
+        console.log(req)
+
+        document.getElementById('image').src = vehicle.model == "Seden" ? "https://www.animatedimages.org/data/media/67/animated-car-image-0028.gif":"https://www.animatedimages.org/data/media/67/animated-car-image-0167.gif"
+       
         document.getElementById('modeltype').innerText = vehicle.model;
         document.getElementById('model').innerText = vehicle.model;
         document.getElementById('checkin').innerText = vehicle.checkin;
         document.getElementById('slot').innerText = vehicle.slot; 
         document.getElementById('name').innerText = user.name; 
         document.getElementById('mail').innerText = user.email;  
-        document.getElementById('createBtn').onclick = ()=>{}
-        const req = {
-            userid: userid,
-            vehicle: vehicle
-        }
-        console.log(req)
-        fetch('http://localhost:5500/checkin',{
+        document.getElementById('createBtn').onclick = ()=>{
+            fetch('http://localhost:5500/checkin',{
             method: "POST",
             body: JSON.stringify(req),
             headers: {
@@ -35,7 +38,8 @@
         }).then(()=>{
             console.log(text);
         })
-        });
+        }});
+        
 </script>
 <body class='font-body'>
     <div class='bg-contain border-4 border-dashed border-green-500 'style='background-image: url("https://64.media.tumblr.com/tumblr_m8d1vfVaNm1qg6rkio1_500.gifv");'>
@@ -63,7 +67,7 @@
             <label class='ml-5 text-3xl text-green-500'>Slot available :></label>
             <label id='slot' class='italic text-3xl text-yellow-200'></label><br><br>
                 <div class="m-10">
-                    <img src="https://www.animatedimages.org/data/media/67/animated-car-image-0167.gif" alt="animated-car-image-0167" />
+                    <img id= "image" src=""/>
                 </div>
         </div>
     </div>
