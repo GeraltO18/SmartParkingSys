@@ -8,12 +8,13 @@ const findcost = (inTime, outTime, model) => {
 };
 
 const createCheckIn = async (req, res) => {
+  console.log(req.body);
   const { userid, vehicle } = req.body;
   const slot = await Slot.findOne({ userid: null });
   slot.userid = userid;
   slot.checkin = vehicle.checkin;
   slot.model = vehicle.model;
-  await slot.save()
+  await slot.save();
   res.send(slot);
 };
 

@@ -18,8 +18,24 @@
         document.getElementById('slot').innerText = vehicle.slot; 
         document.getElementById('name').innerText = user.name; 
         document.getElementById('mail').innerText = user.email;  
-        document.getElementById('createBtn').onclick = ()=>{ const response = await fetch("http://localhost:5500/checkin",{method:'POST',body:JSON.stringify({userid:user._id,vehicle:vehicle})});
-                                                             alert(response);};
+        document.getElementById('createBtn').onclick = ()=>{}
+        const req = {
+            userid: userid,
+            vehicle: vehicle
+        }
+        console.log(req)
+        fetch('http://localhost:5500/checkin',{
+            method: "POST",
+            body: JSON.stringify(req),
+            headers: {
+                'Content-Type': "application/json"
+            }
+        }).then((res)=>{
+            res.text();
+        }).then(()=>{
+            console.log(text);
+        })
+        });
 </script>
 <body class='font-body'>
     <div class='bg-contain border-4 border-dashed border-green-500 'style='background-image: url("https://64.media.tumblr.com/tumblr_m8d1vfVaNm1qg6rkio1_500.gifv");'>
