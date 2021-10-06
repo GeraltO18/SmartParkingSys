@@ -2,7 +2,7 @@ const { model } = require("mongoose");
 const Slot = require("../model/slot.model");
 const User = require("../model/user.model");
 
-let costmap = { SUV: 30, Seden: 20 };
+let costmap = { SUV: 30, Sedan: 20 };
 const findcost = (inTime, outTime, model) => {
   return 5 * costmap["SUV"];
 };
@@ -39,7 +39,7 @@ const checkoutAndBill = async (slotid, checkOutTime) => {
   slot.userid = null;
   slot.checkin = null;
   slot.modal = null;
-  slot.history.push(update);
+  slot.history.push(slotUpdate);
   user.save();
   slot.save();
   return userUpdate;
