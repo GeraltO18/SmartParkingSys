@@ -8,7 +8,7 @@ const send = (bill) => {
     from: "bafid40281@mnqlm.com",
     to: bill.usermail,
     subject: "ParkingLot bill",
-    html: `<h1>Bill<h1><br><span>Kindly pay ${bill.usermail} at the exit<\span>`,
+    html: `<h1>Bill<h1><br><span>Kindly pay ${bill.cost} at the exit or will be charged from ur credit card<\span>`,
   };
 
   sgMail
