@@ -23,6 +23,7 @@ const checkoutAndBill = async (slotid, checkOutTime) => {
   let slot = await Slot.findById(slotid);
   console.log(slot);
   let user = await User.findById(slot.userid);
+  console.log(user);
   let pay = findcost(slot.checkin, checkOutTime, slot.model);
   let slotUpdate = {
     userid: slot.userid,
