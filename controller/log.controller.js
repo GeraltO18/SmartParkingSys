@@ -21,6 +21,7 @@ const createCheckIn = async (req, res) => {
 const checkoutAndBill = async (slotid, checkOutTime) => {
   let slot = await Slot.findById(slotid);
   let user = await User.findById(slot.userid);
+  console.log(user);
   let pay = findcost(slot.checkin, checkOutTime, slot.model);
   let slotUpdate = {
     userid: slot.userid,
