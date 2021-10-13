@@ -5,10 +5,10 @@ sgMail.setApiKey(APIKEY);
 
 const send = (bill) => {
   let msg = {
-    to: bill.mailid,
     from: "bafid40281@mnqlm.com",
+    to: bill.mailid,
     subject: "ParkingLot bill",
-    html: ``,
+    html: `<h1>bill<h1>`,
   };
 
   sgMail
