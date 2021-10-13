@@ -18,7 +18,7 @@
         }
         console.log(req)
 
-        document.getElementById('image').src = vehicle.model == "Seden" ? "https://www.animatedimages.org/data/media/67/animated-car-image-0028.gif":"https://www.animatedimages.org/data/media/67/animated-car-image-0167.gif"
+        document.getElementById('image').src = vehicle.model == "Sedan" ? "https://www.animatedimages.org/data/media/67/animated-car-image-0028.gif":"https://www.animatedimages.org/data/media/67/animated-car-image-0167.gif"
        
         document.getElementById('modeltype').innerText = vehicle.model;
         document.getElementById('model').innerText = vehicle.model;
@@ -34,7 +34,7 @@
                 'Content-Type': "application/json"
             }
         }).then((res)=>{
-            res.text();
+            let text = res.text();
         }).then(()=>{
             console.log(text);
         })
