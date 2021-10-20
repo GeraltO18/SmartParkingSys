@@ -13,6 +13,8 @@
     var socket = io.connect('http://localhost:5500');
     socket.on('connect',()=>{console.log("Connected!!!")});
     window.onload = ()=>{document.getElementById('alert-div').style.display='none';}
+    var slotname = ["slot1","slot2"] 
+    temp = 0
     socket.on('display', function(data) {
         let {user,vehicle} = data;  
         const req = {
@@ -20,21 +22,22 @@
             vehicle: vehicle
         }
         console.log(req)
-
+        
         document.getElementById('image').src = vehicle.model == "Sedan" ? "https://www.animatedimages.org/data/media/67/animated-car-image-0028.gif":"https://www.animatedimages.org/data/media/67/animated-car-image-0167.gif"
-       
+        
         document.getElementById('modeltype').innerText = vehicle.model;
         document.getElementById('model').innerText = vehicle.model;
         document.getElementById('checkin').innerText = vehicle.checkin;
         document.getElementById('slot').innerText = vehicle.slot; 
         document.getElementById('name').innerText = user.name; 
-        document.getElementById('mail').innerText = user.email;  
+        document.getElementById('mail').innerText = user.email;
         
         document.getElementById('createBtn').onclick = ()=>{
             document.getElementById('alert-div').style.display='block';
-            setTimeout(()=>{document.getElementById('alert').style.display='none'},3000);
+            setTimeout(()=>{document.getElementById('alert-div').style.display='none'},3000);
+            document.getElementById(slotname[temp++]).style.backgroundColor = "yellow"
             fetch('http://localhost:5500/checkin',{
-            method: "POST",
+                method: "POST",
             body: JSON.stringify(req),
             headers: {
                 'Content-Type': "application/json"
@@ -52,9 +55,10 @@
     <div id='alert-div' class="bg-green-500 text-center py-4 lg:px-4 z-40 text-4xl">
         <span class="text-yellow-200">Slot booked Come Again !!!!</span>
     </div>
-    <div class='bg-contain border-4 border-dashed border-green-500 'style='background-image: url("https://64.media.tumblr.com/tumblr_m8d1vfVaNm1qg6rkio1_500.gifv");'>
-        <div class=" border-4 border-dashed border-green-500 grid grid-cols-2 divide-x-4 divide-green-500 divide-dashed">
-            <div class="bg-black bg-opacity-80 text-3xl text-green-500">
+</div>
+    <div class='bg-contain border-4 border-dashed border-green-500'style='background-image: url("https://64.media.tumblr.com/tumblr_m8d1vfVaNm1qg6rkio1_500.gifv");'>
+        <div class="flex-row border-4 border-dashed border-green-500 grid grid-cols-2 divide-x-4 divide-green-500 divide-dashed">
+            <div class="bg-opacity-80 text-3xl text-green-500 content-around">
                 <h4 class='p-4 text-4xl'>User Info</h4>
                 <label class='ml-5'>Name : </label>
                 <label id='name' class='italic text-yellow-200'></label><br><br>
@@ -66,9 +70,11 @@
                 <label id='cost' class='italic text-yellow-200'>$30</label><br><br>
                 <label class='ml-5'>Subscription Ends in : </label>
                 <label id='day' class='italic text-yellow-200'>50 days</label><br>
-                <button id='createBtn' class='ml-96 mt-4 bg-green-500 p-2 text-2xl font-bold text-black rounded-lg'>Create</button>
-        </div>
-        <div name='Vechile_Info' class="shadow-lg pl-4 bg-black bg-opacity-80 border-dashed border-green-500 ">
+                <div class="inline-block align-middle justify-center m-4 bg-green-500 p-2 w-24 text-3xl font-bold text-black rounded-lg">
+                    <button id='createBtn' >Create</button>
+                </div>
+            </div>
+            <div name='Vechile_Info' class="shadow-lg pl-4 border-dashed border-green-500 ">
             <h4 class='p-4 text-4xl text-green-500'>Vehicle Info</h4><br>
             <label class='ml-5 text-3xl text-green-500'>Model : </label>
             <label id='model' class='italic text-3xl text-yellow-200'></label><br><br>
@@ -81,8 +87,10 @@
                 </div>
         </div>
     </div>
-    <div name='slot map'class="mt-4 bg-black bg-opacity-80 h-full">
-        <p class="text-center text-green-500 text-4xl">Batch 10 Parking System</p>
+    <div class = "text-green-500 text-6xl text-center m-3">Slot Map</div>
+    <div name='slot map'class="flex flex-row justify-center items-center p-4 h-1/2">
+        <div id="slot1" class="w-1/12 h-1/2 mx-5 -mt-32 bg-green-500 text-black text-9xl text-center pt-5">1</div>
+        <div id="slot2" class="w-1/12 h-1/2 mx-5 -mt-32 bg-green-500  text-black text-9xl text-center pt-5">2</div>
     </div>
 </div>
 </body>
