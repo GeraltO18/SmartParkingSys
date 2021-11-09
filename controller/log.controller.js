@@ -4,8 +4,9 @@ const User = require("../model/user.model");
 
 let costmap = { SUV: 30, Sedan: 20 };
 const findcost = (inTime, outTime, model) => {
-  console.log(inTime, outTime);
-  let diff = outTime - inTime;
+  let temp1 = new Date(inTime);
+  let temp2 = new Date(outTime);
+  let diff = temp2 - temp1;
   let mm = Math.floor(diff / 1000 / 60);
   return mm * costmap[model];
 };
