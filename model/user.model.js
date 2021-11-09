@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const { v4 } = require("uuid");
 
-const setAmount = (val) => (val / 100).toFixed(2);
-const getAmount = (val) => val * 100;
 
 const userSchema = mongoose.Schema({
   _id: {
@@ -20,8 +18,6 @@ const userSchema = mongoose.Schema({
   debt: {
     type: Number,
     default: 0,
-    set: setAmount,
-    get: getAmount,
   },
   history: [
     {
@@ -43,8 +39,6 @@ const userSchema = mongoose.Schema({
       },
       cost: {
         type: Number,
-        set: setAmount,
-        get: getAmount,
       },
     },
   ],
