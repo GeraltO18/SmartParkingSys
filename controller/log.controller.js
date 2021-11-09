@@ -13,11 +13,15 @@ const createCheckIn = async (req, res) => {
   console.log(req.body);
   const { userid, vehicle } = req.body;
   const slot = await Slot.findOne({ userid: null });
-  slot.userid = userid;
-  slot.checkin = vehicle.checkin;
-  slot.model = vehicle.model;
-  await slot.save();
-  res.send(slot);
+  if (slot != null) {
+    slot.userid = userid;
+    slot.checkin = vehicle.checkin;
+    slot.model = vehicle.model;
+    await slot.save();
+    res.send(slot);
+  } else {
+    console.log("Slots are full");
+  }
 };
 
 const checkoutAndBill = async (slotid, checkOutTime) => {
