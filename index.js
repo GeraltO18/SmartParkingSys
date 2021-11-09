@@ -54,7 +54,7 @@ parser.on("data", async (temp) => {
     io.sockets.emit("display", { user, vehicle });
   } else if (method == "checkout") {
     let { slotid, checkoutTime } = data;
-    checkoutTime = new Date().now();
+    checkoutTime = new Date().toISOString();
     let bill = await logController.checkoutAndBill(slotid, checkoutTime);
     emailService.send(bill);
   }

@@ -17,7 +17,7 @@
     temp = 0
     socket.on('display', function(data) {
         let {user,vehicle} = data;
-        vehicle.checkin = new Date().now();  
+        vehicle.checkin = new Date().toISOString();  
         const req = {
             userid: user._id,
             vehicle: vehicle
