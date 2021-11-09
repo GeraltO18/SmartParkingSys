@@ -49,11 +49,12 @@ parser.on("data", async (temp) => {
   const { method, data } = JSON.parse(temp);
   console.log(method, data);
   if (method == "checkin") {
-    let {vehicle} = data;
+    let { vehicle } = data;
     let user = await userController.getUser(data.userid);
-    io.sockets.emit("display", { user,vehicle });
+    io.sockets.emit("display", { user, vehicle });
   } else if (method == "checkout") {
     let { slotid, checkoutTime } = data;
+    checkoutTime = new Date().toLocaleString();
     let bill = await logController.checkoutAndBill(slotid, checkoutTime);
     emailService.send(bill);
   }

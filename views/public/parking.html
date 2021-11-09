@@ -12,11 +12,12 @@
     
     var socket = io.connect('http://localhost:5500');
     socket.on('connect',()=>{console.log("Connected!!!")});
-    window.onload = ()=>{document.getElementById('alert-div').style.display='none';}
-    var slotname = ["slot1","slot2"] 
+    window.onload = ()=>{document.getElementById('alert-div').style.display='none';};
+    var slotname = ["slot1","slot2"];
     temp = 0
     socket.on('display', function(data) {
-        let {user,vehicle} = data;  
+        let {user,vehicle} = data;
+        vehicle.checkin = new Date().toLocaleString();  
         const req = {
             userid: user._id,
             vehicle: vehicle
@@ -31,6 +32,7 @@
         document.getElementById('slot').innerText = vehicle.slot; 
         document.getElementById('name').innerText = user.name; 
         document.getElementById('mail').innerText = user.email;
+        document.getElementById('cost').innerText = vehicle.model == "Sedan" ? "₹10 per hour": "₹20 per hour"
         
         document.getElementById('createBtn').onclick = ()=>{
             document.getElementById('alert-div').style.display='block';
